@@ -1,10 +1,5 @@
 linters: linters_with_defaults(
-  # Variable names deliberately mirror the assignment's own mathematical
-  # notation (X, Y, A, B, C, D, M, F_wind ...) so the code maps 1:1 onto the
-  # theory answers in the report. Enforcing snake_case would hurt readability
-  # for a grader cross-checking code against the formulas.
   object_name_linter = NULL,
-  # False positives on prose comments that mention file paths
-  # (e.g. "output/mandatory1_plots.pdf"), which get misread as code.
-  commented_code_linter = NULL
+  commented_code_linter = NULL,
+  infix_spaces_linter = NULL
   )
