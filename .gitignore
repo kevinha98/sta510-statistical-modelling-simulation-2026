@@ -1,0 +1,14 @@
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python virtual environments (self-excluded via nested .gitignore too)
+.venv/
+.venv_report/
+__pycache__/
+*.pyc
+
+# OS cruft
+.DS_Store
+Thumbs.db

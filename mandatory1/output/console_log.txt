@@ -1,0 +1,10 @@
+Problem 1f(ii): empirical rate = 0.6704  |  theoretical rate = 0.6667
+Problem 1f(ii): proposals used = 7458 (expected ~ 7500)
+Problem 2d: beta_hat = 7.845 mm (n = 40)
+Problem 2d: approximate 95% CI = (5.414, 10.276) mm
+Problem 3d: fitted Gamma shape_hat = 6.2248, rate_hat = 0.7935 (mean = 7.845)
+Problem 3d: bandwidths used - small = 0.266, default = 1.328, large = 5.311
+Problem 4b(ii): simulated mean(Y) = 773.01, simulated sd(Y) = 255.44
+Problem 4b(iii): estimated P(Y > 1050) = 0.1224
+null device 
+          1 
