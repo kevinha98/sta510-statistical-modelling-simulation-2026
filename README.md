@@ -10,6 +10,22 @@ sum of independent random variables. Source: [mandatory1/mandatory1.R](mandatory
 (run with `Rscript mandatory1.R`, seed `510`), full report:
 [mandatory1/mandatory1_report.pdf](mandatory1/mandatory1_report.pdf).
 
+### How to run
+
+Requires only a base R install (any recent version) — no manual setup needed:
+
+```sh
+Rscript mandatory1.R
+```
+
+The script is plug-and-play: it auto-creates a writable personal R library if
+the default one isn't writable, installs its one dependency (`MASS`)
+automatically if missing, resolves `output/` relative to its own file location
+so it works from any working directory, and cleans up open sinks/graphics
+devices (and exits with a non-zero status) if it hits an error partway
+through. Output (console log, per-figure PNGs, combined PDF) is written to
+`mandatory1/output/`.
+
 ### Figures
 
 | | |

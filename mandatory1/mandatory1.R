@@ -1,15 +1,82 @@
 rm(list=ls()) # nolint: infix_spaces_linter. Exact form required by assignment.
 
 ## STA510 - Mandatory assignment 1, autumn 2026
-## R-code for all problems marked [R]. Theory answers are in the report
-## (mandatory1_report.pdf). Console output is written to output/console_log.txt
-## and all figures are saved both as individual PNGs and combined in
-## output/mandatory1_plots.pdf.
+## R-code for all problems marked [R]. Theory answers are in the accompanying
+## report (mandatory1_report.pdf). Console output is echoed live and also
+## written to output/console_log.txt; figures are saved both as individual
+## PNGs and combined into output/mandatory1_plots.pdf.
+##
+## Plug-and-play: the block below auto-creates a writable personal library if
+## the default one isn't writable, installs the one dependency (MASS) if it
+## is missing, resolves output/ relative to this script's own folder (not the
+## caller's working directory), and cleans up if the script errors partway.
+
+## --- Portability setup ---------------------------------------------------
+
+# Use a writable personal library if the default one needs admin rights
+# (e.g. C:/Program Files/R/.../library on Windows).
+user_lib <- Sys.getenv("R_LIBS_USER")
+if (nzchar(user_lib) && !dir.exists(user_lib)) {
+  dir.create(user_lib, recursive = TRUE, showWarnings = FALSE)
+}
+if (nzchar(user_lib) && dir.exists(user_lib) && !(user_lib %in% .libPaths())) {
+  .libPaths(c(user_lib, .libPaths()))
+}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+# MASS is the only non-base dependency (Problem 3d, fitdistr()). It ships
+# with almost every R install, but install it automatically if missing.
+if (!requireNamespace("MASS", quietly = TRUE)) {
+  message("Package 'MASS' not found - installing it now...")
+  install.packages("MASS")
+  if (!requireNamespace("MASS", quietly = TRUE)) {
+    stop("Could not install/load 'MASS'. Please run ",
+         "install.packages('MASS') manually and re-run this script.")
+  }
+}
+library(MASS)
+
+# Resolve output/ against this script's own folder, not the caller's cwd, so
+# `Rscript mandatory1.R` works regardless of where it is invoked from.
+get_script_dir <- function() {
+  cmd_args <- commandArgs(trailingOnly = FALSE)
+  file_flag <- grep("^--file=", cmd_args, value = TRUE)
+  if (length(file_flag) == 1) {
+    return(dirname(normalizePath(sub("^--file=", "", file_flag))))
+  }
+  frame_files <- Filter(Negate(is.null), lapply(sys.frames(), `[[`, "ofile"))
+  if (length(frame_files) > 0) {
+    return(dirname(normalizePath(frame_files[[length(frame_files)]])))
+  }
+  getwd()  # interactive session: assume cwd is already correct
+}
+script_dir <- tryCatch(get_script_dir(), error = function(e) getwd())
+if (dir.exists(script_dir) &&
+      normalizePath(script_dir) != normalizePath(getwd())) {
+  setwd(script_dir)
+  message("Working directory set to script location: ", script_dir)
+}
+
+# If the script stops on an error, make sure no sink()/graphics device is
+# left open (so a failed run never leaves the console silently redirected),
+# and exit with a non-zero status when run non-interactively (Rscript) so
+# automated checks can detect the failure instead of seeing a false "success".
+options(error = function() {
+  message("mandatory1.R stopped with an error - see message above.")
+  while (sink.number() > 0) sink()
+  while (dev.cur() > 1) dev.off()
+  if (!interactive()) quit(status = 1, save = "no")
+})
+
+if (!dir.create("output", showWarnings = FALSE) && !dir.exists("output")) {
+  stop("Could not create the 'output' directory - check write permissions ",
+       "in: ", getwd())
+}
+
+## --- Analysis --------------------------------------------------------------
 
 set.seed(510)  # fixed seed -> reproducible results, referenced in the report
-
-dir.create("output", showWarnings = FALSE)
-sink("output/console_log.txt")
+sink("output/console_log.txt", split = TRUE)  # split: echo to console too
 
 # Draws once into a standalone PNG (plot_<idx>.png), then re-draws the same
 # (deterministic, RNG-free) plotting code into the already-open combined PDF
@@ -40,8 +107,12 @@ F_wind <- function(x, a) {
   (3 / 4000) * (10 * u^2 - u^3 / 3)
 }
 
-# 1d) Inverse cdf F^{-1}(p;a) via uniroot, used for inverse-transform sampling
+# 1d) Inverse cdf F^{-1}(p;a) via uniroot, used for inverse-transform sampling.
+# Guards the boundary cases p<=0 / p>=1 directly, since uniroot() requires
+# opposite-signed endpoints (probability-zero with runif(), but be safe).
 Finv_wind <- function(p, a) {
+  if (p <= 0) return(a)
+  if (p >= 1) return(a + 20)
   uniroot(function(x) F_wind(x, a) - p, lower = a, upper = a + 20)$root
 }
 
@@ -162,8 +233,14 @@ save_plot(5, {
 })
 
 # 3d) Fit a Gamma model via fitdistr() and compare KDE bandwidths
-library(MASS)
-fit_gamma <- fitdistr(rain, "gamma")
+# (MASS was loaded, installing it first if needed, in the setup section above)
+fit_gamma <- tryCatch(
+  fitdistr(rain, "gamma"),
+  error = function(e) {
+    stop("MASS::fitdistr() failed to fit a Gamma to `rain`: ",
+         conditionMessage(e))
+  }
+)
 shape_hat <- fit_gamma$estimate["shape"]
 rate_hat <- fit_gamma$estimate["rate"]
 
@@ -229,3 +306,6 @@ save_plot(7, {
 
 dev.off()  # close the combined mandatory1_plots.pdf device
 sink()
+
+message("Done. See output/console_log.txt, output/plot_01..07.png and ",
+        "output/mandatory1_plots.pdf in: ", getwd())
