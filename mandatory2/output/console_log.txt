@@ -1,0 +1,26 @@
+Problem 1: reference value integrate() = 0.795472
+Problem 1a(i): I_CMC = 0.789879
+Problem 1c: I_AT = 0.797101
+Problem 1f: I_IS = 0.797711
+Problem 1g: 1000 replications of each estimator
+        mean       sd var_reduction_pct
+CMC 0.795487 0.005666           0.00000
+AT  0.795568 0.002097          86.29973
+IS  0.795327 0.003204          68.02797
+Problem 2a: E(T) = 5.3174, SD(T) = 2.7795 months
+Problem 2b: number of failures in [0,60] = 9
+Problem 2c(i): estimated E[N(60)] = 10.9406 (t/E(T) = 11.2838)
+Problem 2c(ii): estimated P(N(60) >= 15) = 0.0304
+Problem 2d: Lambda(36) = 108.0000
+Problem 2e: failures in one NHPP realisation on [0,36] = 133
+Problem 2f(i): estimated E[N(36)] = 108.0810 (theory 108.0000)
+Problem 2f(ii): estimated P(N(36) > 120) = 0.1194 (Poisson: 0.1158)
+Problem 2f(iii): estimated E[N(3)] = 12.8890 (theory 12.8197)
+Problem 3a: xbar = 7.845, bootstrap sd = 0.4790
+Problem 3a: 95% percentile bootstrap CI = (6.947, 8.780)
+Problem 3a: M1 2d CLT CI (exp. model) = (5.414, 10.276)
+Problem 3a: s/sqrt(n) = 0.4878 (for comparison)
+Problem 3b: sample median = 7.400, bootstrap sd = 0.6948
+Problem 3b: 95% percentile bootstrap CI = (6.250, 8.950)
+null device 
+          1 
