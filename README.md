@@ -39,6 +39,17 @@ through. Output (console log, per-figure PNGs, combined PDF) is written to
 | ![Problem 4b(i): simulated distribution of total annual precipitation Y](mandatory1/output/plot_07.png) | |
 | Problem 4b(i): simulated distribution of Y = A+B+C+D | |
 
+### Report preview
+
+All 11 pages of [mandatory1/mandatory1_report.pdf](mandatory1/mandatory1_report.pdf).
+Click a page to open the PDF.
+
+| | | | |
+| --- | --- | --- | --- |
+| [![Report page 1](mandatory1/report_preview/page_01.png)](mandatory1/mandatory1_report.pdf) | [![Report page 2](mandatory1/report_preview/page_02.png)](mandatory1/mandatory1_report.pdf) | [![Report page 3](mandatory1/report_preview/page_03.png)](mandatory1/mandatory1_report.pdf) | [![Report page 4](mandatory1/report_preview/page_04.png)](mandatory1/mandatory1_report.pdf) |
+| [![Report page 5](mandatory1/report_preview/page_05.png)](mandatory1/mandatory1_report.pdf) | [![Report page 6](mandatory1/report_preview/page_06.png)](mandatory1/mandatory1_report.pdf) | [![Report page 7](mandatory1/report_preview/page_07.png)](mandatory1/mandatory1_report.pdf) | [![Report page 8](mandatory1/report_preview/page_08.png)](mandatory1/mandatory1_report.pdf) |
+| [![Report page 9](mandatory1/report_preview/page_09.png)](mandatory1/mandatory1_report.pdf) | [![Report page 10](mandatory1/report_preview/page_10.png)](mandatory1/mandatory1_report.pdf) | [![Report page 11](mandatory1/report_preview/page_11.png)](mandatory1/mandatory1_report.pdf) | |
+
 ## Mandatory assignment 2
 
 Monte Carlo integration with variance reduction (crude MC, antithetic
@@ -72,3 +83,13 @@ script, and open sinks/graphics devices are cleaned up on error. Output
 | Problem 2b: one realisation of the Weibull(2, 6) renewal process | Problem 2e: seasonal intensity λ(t) = 3 + 2cos(πt/6) |
 | ![Problem 2e: one NHPP realisation simulated by thinning](mandatory2/output/plot_05.png) | ![Problem 3: bootstrap distributions of the sample mean and median](mandatory2/output/plot_06.png) |
 | Problem 2e: one NHPP realisation (thinning) vs Λ(t) = E[N(t)] | Problem 3a/b: bootstrap means and medians with 95% percentile limits |
+
+### Report preview
+
+All 5 pages of [mandatory2/mandatory2_report.pdf](mandatory2/mandatory2_report.pdf).
+Click a page to open the PDF.
+
+| | | | |
+| --- | --- | --- | --- |
+| [![Report page 1](mandatory2/report_preview/page_01.png)](mandatory2/mandatory2_report.pdf) | [![Report page 2](mandatory2/report_preview/page_02.png)](mandatory2/mandatory2_report.pdf) | [![Report page 3](mandatory2/report_preview/page_03.png)](mandatory2/mandatory2_report.pdf) | [![Report page 4](mandatory2/report_preview/page_04.png)](mandatory2/mandatory2_report.pdf) |
+| [![Report page 5](mandatory2/report_preview/page_05.png)](mandatory2/mandatory2_report.pdf) | | | |

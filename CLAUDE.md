@@ -46,7 +46,7 @@ The script header is designed to be plug-and-play on any machine; copy it for `m
 - `output/mandatoryN_plots.pdf` always shows as modified after a run because R's `pdf()` embeds a `/CreationDate`.
 - In PowerShell, `Rscript ... 2>&1` reports the script's final `message()` as `NativeCommandError`; check `$LASTEXITCODE` instead.
 - The report build prints Edge errors (`fallback_task_provider`, `GetUpdates ... ERR_IO_PENDING`); the PDF is still written correctly.
-- The README embeds each assignment's `output/plot_*.png`; update it when adding a new assignment.
+- The README embeds each assignment's `output/plot_*.png` and `report_preview/page_*.png`; update it when adding a new assignment, and re-render `report_preview/` (PyMuPDF `page.get_pixmap(dpi=110)`) whenever a report PDF is rebuilt.
 
 ## Commits
 
