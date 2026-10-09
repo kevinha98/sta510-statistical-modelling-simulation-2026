@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Coursework for STA510 Statistical modelling and simulation (autumn 2026). Plain base-R scripts, no package/build system, no tests.
 
-- `mandatoryN/` — one folder per graded assignment: `mandatoryN_2026.pdf` (the assignment), `mandatoryN_2026.md` (markdown extraction of that PDF — read this instead of the PDF; mandatory1 also has `images/` to check garbled formulas against), `mandatoryN.R` (solution code), `mandatoryN_report.pdf` (theory answers/discussion), `output/` (generated, committed).
+- `mandatoryN/` — one folder per graded assignment: `mandatoryN_2026.pdf` (the assignment), `mandatoryN_2026.md` (markdown extraction of that PDF — read this instead of the PDF; mandatory1 still has garbled inline math and keeps formula PNGs in `images/`, mandatory2's formulas are LaTeX checked against the PDF), `mandatoryN.R` (solution code), `mandatoryN_report.pdf` (theory answers/discussion; for mandatory2 built from `mandatory2_report.md`), `output/` (generated, committed).
 - `R_examples/`, `Solutions/` (`R-code_setN.R` + `solution_setN.pdf`), `Lecture_Notes/` — course reference material. Reuse their methods and notation (inverse transform, acceptance-rejection, KDE, bootstrap, MC integration, importance sampling, MCMC, Markov) rather than inventing different approaches.
 
 ## Commands
@@ -14,9 +14,12 @@ Coursework for STA510 Statistical modelling and simulation (autumn 2026). Plain 
 ```sh
 cd mandatory1 && Rscript mandatory1.R       # run an assignment; writes to mandatory1/output/
 Rscript -e "lintr::lint('mandatory1/mandatory1.R')"   # should report 0 lints
+npx markdownlint-cli2 "**/*.md"             # should report 0 issues (rules in .markdownlint.json)
 ```
 
-R 4.5.2 at `C:\Program Files\R\R-4.5.2`; VS Code uses radian as the R terminal.
+R 4.5.2 at `C:\Program Files\R\R-4.5.2`, not on PATH in plain PowerShell: call `& "C:\Program Files\R\R-4.5.2\bin\Rscript.exe"`. VS Code uses radian as the R terminal.
+
+The mandatory2 report PDF is rendered outside the repo: `node build.js <report.md> <out.pdf>` in `~/.cache/sta510-report` (markdown-it + KaTeX, printed by headless Edge). Rebuild it after every edit to the report markdown, otherwise the committed PDF goes stale.
 
 ## Assignment rules (from the assignment PDFs)
 
@@ -41,7 +44,9 @@ The script header is designed to be plug-and-play on any machine; copy it for `m
 
 - Running via `source()` (VS Code "R Interactive") instead of `Rscript` drops the trailing `null device` / `1` lines from `console_log.txt` — not a regression, numbers are identical.
 - `output/mandatoryN_plots.pdf` always shows as modified after a run because R's `pdf()` embeds a `/CreationDate`.
-- The README embeds `mandatory1/output/plot_*.png`; update it when adding a new assignment.
+- In PowerShell, `Rscript ... 2>&1` reports the script's final `message()` as `NativeCommandError`; check `$LASTEXITCODE` instead.
+- The report build prints Edge errors (`fallback_task_provider`, `GetUpdates ... ERR_IO_PENDING`); the PDF is still written correctly.
+- The README embeds each assignment's `output/plot_*.png`; update it when adding a new assignment.
 
 ## Commits
 

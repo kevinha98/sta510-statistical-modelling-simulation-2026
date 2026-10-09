@@ -38,3 +38,37 @@ through. Output (console log, per-figure PNGs, combined PDF) is written to
 | Problem 3b: rain histogram, fitted Exp density and KDE | Problem 3d: fitted Gamma density and KDE at three bandwidths |
 | ![Problem 4b(i): simulated distribution of total annual precipitation Y](mandatory1/output/plot_07.png) | |
 | Problem 4b(i): simulated distribution of Y = A+B+C+D | |
+
+## Mandatory assignment 2
+
+Monte Carlo integration with variance reduction (crude MC, antithetic
+variables, importance sampling with a truncated exponential), a Weibull
+renewal process and a seasonal non-homogeneous Poisson process simulated by
+thinning, and non-parametric bootstrap CIs for the mean and median of the M1
+rainfall data. Source: [mandatory2/mandatory2.R](mandatory2/mandatory2.R)
+(run with `Rscript mandatory2.R`, seed `510`), full report:
+[mandatory2/mandatory2_report.pdf](mandatory2/mandatory2_report.pdf).
+
+### How to run
+
+Base R only, so there is nothing to install:
+
+```sh
+Rscript mandatory2.R
+```
+
+Same plug-and-play setup as mandatory 1: `output/` is resolved relative to the
+script, and open sinks/graphics devices are cleaned up on error. Output
+(console log, per-figure PNGs, combined PDF) is written to
+`mandatory2/output/`.
+
+### Figures
+
+| | |
+| --- | --- |
+| ![Problem 1a(ii): the integrand f(t) on 0 to 2](mandatory2/output/plot_01.png) | ![Problem 1d: f(t) and the importance function g(t)](mandatory2/output/plot_02.png) |
+| Problem 1a(ii): integrand f(t) = e^(−t/2)/(1+t²) on [0, 2] | Problem 1d: f(t) and importance function g(t) |
+| ![Problem 2b: one realisation of the Weibull renewal process](mandatory2/output/plot_03.png) | ![Problem 2e: seasonal failure intensity](mandatory2/output/plot_04.png) |
+| Problem 2b: one realisation of the Weibull(2, 6) renewal process | Problem 2e: seasonal intensity λ(t) = 3 + 2cos(πt/6) |
+| ![Problem 2e: one NHPP realisation simulated by thinning](mandatory2/output/plot_05.png) | ![Problem 3: bootstrap distributions of the sample mean and median](mandatory2/output/plot_06.png) |
+| Problem 2e: one NHPP realisation (thinning) vs Λ(t) = E[N(t)] | Problem 3a/b: bootstrap means and medians with 95% percentile limits |
